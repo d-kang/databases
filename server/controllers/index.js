@@ -5,10 +5,9 @@ module.exports = {
   messages: {
     get: function (req, res) {
       // write sql code here
-      res.status(200).send('hi')
+      res.status(200).send('hi');
       // res.status(200).send('hi')
 
-      // app.use(express.static(__dirname + '/../../client'));
     }, // a function which handles a get request for all messages
     post: function (req, res) {} // a function which handles posting a message to the database
   },
