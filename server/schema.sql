@@ -23,23 +23,11 @@ CREATE TABLE users (
   PRIMARY KEY (ID)
 );
 
+alter table users add constraint unique (username);
 
 /*  Execute this file from the command line by typing:
  *    mysql -u root < server/schema.sql
  *  to create the database and the tables.*/
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 -- DROP TABLE IF EXISTS `user_table`;
 -- CREATE TABLE `user_table` (
