@@ -4,12 +4,21 @@ var app = express();
 module.exports = {
   messages: {
     get: function (req, res) {
-      // write sql code here
-      res.status(200).send('hi');
-      // res.status(200).send('hi')
+      models.messages.get(function(err, results) {
+        if (err) {
+          throw err;
+        }
+        res.json(results);
+      });
 
     }, // a function which handles a get request for all messages
-    post: function (req, res) {} // a function which handles posting a message to the database
+    post: function (req, res) {
+      // models.messages.post()
+      // get the body object from the post
+      console.log('Here is the post from messages: ', req);
+      res.sendStatus(201);
+
+    } // a function which handles posting a message to the database
   },
 
   users: {
