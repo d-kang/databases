@@ -6,7 +6,9 @@
     <link rel="stylesheet" href="styles/styles.css">
 
     <!-- dependencies -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <!-- <script src="bower_components/jquery/dist/jquery.js"></script> -->
+    <script   src="https://code.jquery.com/jquery-3.2.1.js"   integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="   crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.17.0/axios.js" charset="utf-8"></script>
     <script>
       // YOU DO NOT NEED TO EDIT THIS CODE
       if (!/(&|\?)username=/.test(window.location.search)) {
@@ -27,8 +29,9 @@
       <h1>chatterbox</h1>
       <!-- Your HTML goes here! -->
 
-      <div class="spinner"><img src="images/spiffygif_46x46.gif"></div>
-      <div id="rooms">
+      <!-- <div class="spinner"><img src="images/spiffygif_46x46.gif"></div> -->
+
+      <!-- <div id="rooms">
         Room:
         <select id="roomSelect">
         </select>
@@ -37,11 +40,37 @@
         <input type="text" name="message" id="message"/>
         <input type="submit" name="submit" class="submit"/>
       </form>    </div>
+    <div id="chats"></div> -->
+      <div id="rooms">
+        Room:
+        <select id="roomSelect">
+        </select>
+      </div>
+      <form  id="send">
+        <input type="text" id="message"/>
+        <input type="button" value="submit"/>
+      </form>    </div>
     <div id="chats"></div>
 
     <script>
       $(function(){
-        app.init()
+        // app.init()
+        const send$ = document.getElementById('send')
+        send$.onsubmit = function myFunc(e) {
+          e.preventDefault();
+          const val = e.target[0].value;
+          console.log('val', val);
+
+          axios.post('/testing123', {val})
+            .then(data => console.log('successful post', data))
+            .catch(err => console.log('ERR: unsuccessful post', err))
+
+        }
+
+
       });
+
+      // console.log('axios', axios.get)
+
     </script>  </body>
 </html>
