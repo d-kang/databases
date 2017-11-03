@@ -56,6 +56,7 @@
 
     <script>
       const send$ = document.getElementById('send')
+      const chats$ = document.getElementById('chats')
 
 
       send$.onsubmit = function myFunc(e) {
@@ -74,8 +75,13 @@
         console.log('data', data);
         axios.post('/testing123', data)
           .then(response => console.log('AJAX POST SUCCESS: \n response.data => ', response.data))
-          .catch(err => console.log('AJAX POST ERR: \n unsuccessful post err => ', err))
+          .catch(err => console.error('AJAX POST ERR: \n unsuccessful post err => ', err))
 
+        axios.get('/testing123')
+          .then(response => response.data)
+          .then(data => chats$.innerText = JSON.stringify(data))
+          .then(response => console.log('AJAX GET SUCCESS: \n response.data => ', response.data))
+          .catch(err => console.error('AJAX GET ERR: \n unsuccessful get err => ', err))
       }
     </script>
   </body>
