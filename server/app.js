@@ -19,17 +19,17 @@ app.set('port', 3000);
 app.use(morgan('dev'));
 app.use(parser.json());
 
-const store = [];
-
-app.post('/testing123', (req, res) => {
-  console.log('req.body', req.body);
-  store.push(req.body);
-  res.json(req.body);
-});
-app.get('/testing123', (req, res) => {
-  console.log('req.body', req.body);
-  res.send(store);
-});
+// const store = [];
+//
+// app.post('/testing123', (req, res) => {
+//   console.log('req.body', req.body);
+//   store.push(req.body);
+//   res.json(req.body);
+// });
+// app.get('/testing123', (req, res) => {
+//   console.log('req.body', req.body);
+//   res.send(store);
+// });
 // Set up our routes
 app.use('/classes', router);
 

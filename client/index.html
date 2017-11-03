@@ -73,11 +73,11 @@
         const username = window.location.search.slice(10);
         const data = {text, roomname, username};
         console.log('data', data);
-        axios.post('/testing123', data)
+        axios.post('/classes/messages', data)
           .then(response => console.log('AJAX POST SUCCESS: \n response.data => ', response.data))
           .catch(err => console.error('AJAX POST ERR: \n unsuccessful post err => ', err))
 
-        axios.get('/testing123')
+        axios.get('/classes/messages')
           .then(response => response.data)
           .then(data => chats$.innerText = JSON.stringify(data))
           .then(response => console.log('AJAX GET SUCCESS: \n response.data => ', response.data))
