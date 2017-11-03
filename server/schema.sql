@@ -8,11 +8,19 @@ USE chat;
 --
 -- );
 
-CREATE TABLE Studentssssss(
-  LastName varchar(30) NOT NULL,
-  FirstName varchar(30) NOT NULL,
-  StudId int NOT NULL,
-  PRIMARY KEY (StudId)
+
+CREATE TABLE messages(
+  ID int NOT NULL AUTO_INCREMENT,
+  userID int NOT NULL,
+  text varchar(200) NOT NULL,
+  roomname varchar(20) NOT NULL,
+  PRIMARY KEY (ID)
+);
+
+CREATE TABLE users(
+  ID int NOT NULL AUTO_INCREMENT,
+  username varchar(50) NOT NULL,
+  PRIMARY KEY (ID)
 );
 
 /* Create other tables and define schemas for them here! */
