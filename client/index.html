@@ -60,23 +60,17 @@
 
       send$.onsubmit = function myFunc(e) {
         e.preventDefault();
-        const roomName$ = document.getElementById('roomSelect')
-        console.log('roomName$.children', roomName$.children.length)
-        let currentRoom;
-        for (var elem of roomName$) {
+        const rooms$ = document.getElementById('roomSelect')
+        let roomname;
+        for (var elem of rooms$) {
           if (elem.selected) {
             currentRoom = elem.innerText;
             break;
           }
         }
-        console.log('currentRoom', currentRoom);
-        // roomName$.children.forEach((elem) => {console.log('elem', elem)})
-        console.log('roomName$', roomName$);
+        const text = e.target[0].value;
 
-        const val = e.target[0].value;
-        console.log('val', val);
-
-        axios.post('/testing123', {val})
+        axios.post('/testing123', {text, roomname})
           .then(data => console.log('successful post', data))
           .catch(err => console.log('ERR: unsuccessful post', err))
 
