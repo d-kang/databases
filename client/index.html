@@ -44,6 +44,8 @@
       <div id="rooms">
         Room:
         <select id="roomSelect">
+           <option value="value1">general</option>
+           <option value="value1">hrr25</option>
         </select>
       </div>
       <form  id="send">
@@ -53,24 +55,32 @@
     <div id="chats"></div>
 
     <script>
-      $(function(){
-        // app.init()
-        const send$ = document.getElementById('send')
-        send$.onsubmit = function myFunc(e) {
-          e.preventDefault();
-          const val = e.target[0].value;
-          console.log('val', val);
+      const send$ = document.getElementById('send')
 
-          axios.post('/testing123', {val})
-            .then(data => console.log('successful post', data))
-            .catch(err => console.log('ERR: unsuccessful post', err))
 
+      send$.onsubmit = function myFunc(e) {
+        e.preventDefault();
+        const roomName$ = document.getElementById('roomSelect')
+        console.log('roomName$.children', roomName$.children.length)
+        let currentRoom;
+        for (var elem of roomName$) {
+          if (elem.selected) {
+            currentRoom = elem.innerText;
+            break;
+          }
         }
+        console.log('currentRoom', currentRoom);
+        // roomName$.children.forEach((elem) => {console.log('elem', elem)})
+        console.log('roomName$', roomName$);
 
+        const val = e.target[0].value;
+        console.log('val', val);
 
-      });
+        axios.post('/testing123', {val})
+          .then(data => console.log('successful post', data))
+          .catch(err => console.log('ERR: unsuccessful post', err))
 
-      // console.log('axios', axios.get)
-
-    </script>  </body>
+      }
+    </script>
+  </body>
 </html>
