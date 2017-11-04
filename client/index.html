@@ -58,6 +58,11 @@
       const send$ = document.getElementById('send')
       const chats$ = document.getElementById('chats')
 
+      axios.get('/classes/messages')
+        .then(response => response.data)
+        .then(data => chats$.innerText = JSON.stringify(data))
+        .then(response => console.log('AJAX GET SUCCESS: \n response.data => ', response.data))
+        .catch(err => console.error('AJAX GET ERR: \n unsuccessful get err => ', err))
 
       send$.onsubmit = function myFunc(e) {
         e.preventDefault();
