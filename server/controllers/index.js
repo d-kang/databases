@@ -5,7 +5,8 @@ module.exports = {
   messages: {
     get: function (req, res) {
       models.messages.get()
-        .then(result => res.send(result));
+        .then(result => res.send(result))
+        .catch(err => console.error(err));
 
     }, // a function which handles a get request for all messages
     post: function (req, res) {
@@ -13,8 +14,8 @@ module.exports = {
       console.log('text', text, 'username', username, 'roomname', roomname);
 
       const query = `insert into messages
-       (user_id, text, roomname)
-       values (1, '${text}', '${roomname}');`;
+        (user_id, text, roomname)
+        values (1, '${text}', '${roomname}');`;
 
       models.messages.post(query)
         .then(data => {
@@ -27,38 +28,56 @@ module.exports = {
   users: {
     // Ditto as above
     get: function (req, res) {
+      // get username and use whereever you need to get user
+      // can use to see if user exists and get id number
+      const { username } = req.body;
+      const q2 = `select * from users where username='${username}';`
+      dbConnection.query(q2, (err, results, fields) => {
+        if (err) {
+          console.log('errrrrrrrrrrrrrrrrr', err);
+        } else {
+          var isFound = results.length > 0;
 
+          if (isFound) {
+            res.send(results)
+          } else {
+            return null;
+          }
+
+        }
+      });
     },
     post: function (req, res) {
       const {username} = req.body;
-      var query = `insert into users
-       (username)
-       values ('${username}');`
+      const q1 = `select * from users where username='${username}';`
+      var q2= `insert into users
+        (username)
+        values ('${username}');`
 
-       // check if user exists
-          // if user doesnt exist add user
-          // if user does exist then do nothing but still have to send something back to client
-      const q2 = `select * from users where username='d';`
-      dbConnection.query(q2, (err, results, fields) => {
+      dbConnection.query(q1, (err, results, fields) => {
+          console.log('/////////////////////////////////////////1')
         if (err) {
           console.log('err', err);
         } else {
           var isFound = results.length > 0;
 
           if (isFound) {
-            res.send('already in db');
+            res.send(results);
           } else {
-            dbConnection.query(query, (err, results, fields) => {
+            console.log('/////////////////////////////////////////2')
+            dbConnection.query(q2, (err, results, fields) => {
               if (err) {
                 console.log('err', err);
               } else {
-                res.send('user was added', results);
+                res.send(results);
               }
             });
           }
 
         }
       });
+
+
 
     }
   }
