@@ -1,9 +1,19 @@
-
-var db = require('../db');
+var dbConnection = require('../db');
 
 module.exports = {
   messages: {
     get: function () {
+      return new Promise((resolve, reject) => {
+
+        dbConnection.query(`SELECT * FROM messages;`, (err, results, fields) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(results);
+          }
+        });
+      });
+
 
     }, // a function which produces all the messages
     post: function () {

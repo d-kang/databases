@@ -1,13 +1,11 @@
 var models = require('../models');
-var dbConnection = require('../db')
+var dbConnection = require('../db');
 
 module.exports = {
   messages: {
     get: function (req, res) {
-      dbConnection.query(`SELECT * FROM messages;`, (err, results, fields) => {
-        if (err) throw err;
-        res.send(results);
-      })
+      models.messages.get()
+        .then(result => res.send(result));
 
     }, // a function which handles a get request for all messages
     post: function (req, res) {
