@@ -6,7 +6,6 @@ module.exports = {
     get: function (req, res) {
       dbConnection.query(`SELECT * FROM messages;`, (err, results, fields) => {
         if (err) throw err;
-        console.log('results', results);
         res.send(results);
       })
 
@@ -16,7 +15,7 @@ module.exports = {
       console.log('text', text, 'username', username, 'roomname', roomname);
 
       const query = `insert into messages
-       (userID, text, roomname)
+       (user_id, text, roomname)
        values (1, '${text}', '${roomname}');`;
 
        console.log('query', query)
