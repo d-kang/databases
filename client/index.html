@@ -61,8 +61,8 @@
       axios.get('/classes/messages')
         .then(response => response.data)
         .then(data => chats$.innerText = JSON.stringify(data))
-        .then(response => console.log('AJAX GET SUCCESS: \n response.data => ', response.data))
-        .catch(err => console.error('AJAX GET ERR: \n unsuccessful get err => ', err))
+        .then(response => console.log('AJAX INITIAL MESSAGES GET SUCCESS: \n response.data => ', response.data))
+        .catch(err => console.error('AJAX INITIAL MESSAGES GET ERR: \n unsuccessful get err => ', err))
 
       send$.onsubmit = function myFunc(e) {
         e.preventDefault();
@@ -76,11 +76,14 @@
         }
         const text = e.target[0].value;
         const username = window.location.search.slice(10);
-        const data = {text, roomname, username};
-        console.log('data', data);
-        axios.post('/classes/messages', data)
-          .then(response => console.log('AJAX POST SUCCESS: \n response.data => ', response.data))
-          .catch(err => console.error('AJAX POST ERR: \n unsuccessful post err => ', err))
+
+        axios.post('/classes/users', {username})
+          .then(response => console.log('AJAX USERS POST SUCCESS: \n response.data => ', response.data))
+          .catch(err => console.error('AJAX USERS POST ERR: \n unsuccessful post err => ', err))
+
+        axios.post('/classes/messages', {text, roomname})
+          .then(response => console.log('AJAX MESSAGES POST SUCCESS: \n response.data => ', response.data))
+          .catch(err => console.error('AJAX MESSAGES POST ERR: \n unsuccessful post err => ', err))
 
         axios.get('/classes/messages')
           .then(response => response.data)

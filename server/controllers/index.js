@@ -26,8 +26,21 @@ module.exports = {
 
   users: {
     // Ditto as above
-    get: function (req, res) {},
-    post: function (req, res) {}
+    get: function (req, res) {
+
+    },
+    post: function (req, res) {
+      var query = `insert into users
+       (username)
+       values ('david');`
+      dbConnection.query(query, (err, results, fields) => {
+        if (err) {
+          console.log('err', err);
+        } else {
+          res.send(results);
+        }
+      })
+    }
   }
 };
 
