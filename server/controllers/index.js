@@ -16,15 +16,10 @@ module.exports = {
        (user_id, text, roomname)
        values (1, '${text}', '${roomname}');`;
 
-       console.log('query', query)
-      dbConnection.query(query, (err, results, fields) => {
-        if (err) throw err;
-        console.log('results', results);
-        return results;
-      })
+      models.messages.post(query)
         .then(data => {
           console.log('data POST from DB', data);
-          res.json(data)
+          res.json(data);
         });
     } // a function which handles posting a message to the database
   },

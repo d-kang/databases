@@ -16,8 +16,16 @@ module.exports = {
 
 
     }, // a function which produces all the messages
-    post: function () {
-
+    post: function (query) {
+      return new Promise((resolve, reject) => {
+        dbConnection.query(query, (err, results, fields) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(results);
+          }
+        });
+      });
     } // a function which can be used to insert a message into the database
   },
 
