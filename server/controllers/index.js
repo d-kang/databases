@@ -37,7 +37,6 @@ module.exports = {
           console.log('errrrrrrrrrrrrrrrrr', err);
         } else {
           var isFound = results.length > 0;
-
           if (isFound) {
             res.send(results)
           } else {
